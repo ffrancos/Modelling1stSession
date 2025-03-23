@@ -1,63 +1,73 @@
 import random
+from ftplib import parse227
+
 
 class Point:
     """
-    Class Modeling a real life 2D point
+    Class modeling a real life 2D point
     """
-    def __init__(self,x,y):
+    def __init__(self, x, y):
         """
         Initialize the point instance
-        :param x: x axis coordinate value
-        :param y: y axis coordinate value
+        :param x: the x axis coordinate value
+        :param y: the y axis coordinate value
         """
-        self.x=x
-        self.y=y
+        self.x = x
+        self.y = y
+
     def __str__(self):
-        """Magic Method that defines how a point is printed
-        """
-        return f"<{self.x},{self.y}>"
+        return f"<{self.x}, {self.y}>"
+
     def __repr__(self):
         return self.__str__()
-    def distance_origin(self):
-        return (self.x**2+self.y**2)**0.5
+
+    def distance_orig(self):
+        return (self.x**2 + self.y**2)**0.5
+
     def __gt__(self, other):
         """
-        self>other
-        :param other: the other point
+        Magic method that is called when you do self>other
+        :param other: the other point comparing against
         :return: True/False
         """
-        return self.distance_origin()>other.distance_origin()
+        return self.distance_orig() > other.distance_orig()
+
     def __eq__(self, other):
-        return self.distance_origin()==other.distance_orig()
+        return self.distance_orig() == other.distance_orig()
 
-points=[]
-for i in range (5):
-    p=Point(
-        random.randint(-100,100),
-        random.randint (-100, 100)
-    )
-    points.append(p)
+if __name__ == "__main__":
+    points = []
+    for i in range(5):
+        # create a random point
+        p = Point(
+            random.randint(-100, 100),
+            random.randint(-100, 100)
+        )
+        # append it to the list
+        points.append(p)
 
-print(points)
+    print("unsorted points")
+    print(points)
+    print("sorted points")
+    points.sort()
+    print(points)
 
+    found_equal = 0
+    count = 0
+    while True:
+        if found_equal == 10000:
+            break
+        p1 = Point(
+            random.randint(-100, 100),
+            random.randint(-100, 100)
+        )
+        p2 = Point(
+            random.randint(-100, 100),
+            random.randint(-100, 100)
+        )
+        count += 1
+        if p1 == p2:
+            # print(p1, p2)
+            found_equal += 1
 
-
-p1=Point(1,2)
-p2=Point(3,4)
-p3=Point("MARK","JANE")
-print(p1.x,p1.y)
-print(p1)
-print(po)
-
-
-
-
-
-
-
-
-
-
-
-
-
+    print(f"probability is 1 in {count/found_equal} ")
