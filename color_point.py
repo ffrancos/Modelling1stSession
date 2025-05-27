@@ -11,6 +11,10 @@ class ColorPoint(Point):
         self.color = color
 
     def __str__(self):
+        """
+         Magic method that defines the format on how a color point is printed
+        :return:the point as a string containing x, y and color
+        """
         return f"<{self.x},{self.y}>({self.color})"
 if __name__=="__main__":
     color_points = []
